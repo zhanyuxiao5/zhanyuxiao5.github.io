@@ -1,0 +1,142 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Arial', 'Helvetica Neue', sans-serif;
+    background: #ffffff;
+    color: #2b2219;
+    line-height: 1.7;
+}
+
+.page-frame {
+    max-width: 980px;
+    margin: 30px auto;
+    padding: 40px 40px 60px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.page-title {
+    font-size: 96px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+}
+
+.meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.meta .doc-title {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.meta .doc-sub {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.hero {
+    width: 100%;
+    margin: 30px 0 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.hero img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.credit {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+}
+
+.content {
+    max-width: 760px;
+    margin: 0 auto;
+    font-size: 14px;
+}
+
+.gallery {
+    margin: 40px auto 0;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.gallery img {
+    width: 100%;
+    height: auto;
+    display: block;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .page-title { font-size: 64px; }
+    .page-frame { padding: 28px; }
+}
+
+/* ===========================
+   Design 分类：全屏详情页样式
+   =========================== */
+
+/* 外层框架去掉限制 */
+.page-frame.fullscreen {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: #fff;
+}
+
+/* hero 和 gallery 的图片：自适应，两侧各留 20px */
+.page-frame.fullscreen .hero img,
+.page-frame.fullscreen .gallery img {
+  width: calc(100% - 40px);  /* 屏幕宽度 - 40px = 两侧各 20px 空隙 */
+  max-width: 1600px;         /* 可选：大屏时不要无限拉宽 */
+  margin: 0 auto;            /* 居中显示 */
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* hero 与正文之间留一点间距 */
+.page-frame.fullscreen .hero {
+  margin: 20px 0;
+}
+
+/* gallery 容器：取消默认 760px 限制，图片之间留间距 */
+.page-frame.fullscreen .gallery {
+  max-width: none;    /* 去掉 760px 限制 */
+  width: 100%;
+  margin: 20px 0 0;
+  gap: 24px;          /* 图片之间间距 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* content 内容区：取消 760px 限制 */
+.page-frame.fullscreen .content {
+  max-width: none;
+  margin: 20px 0;
+}
+
+/* 仅 design 分类：标题和小标题往里缩进 */
+.page-frame.fullscreen .page-title,
+.page-frame.fullscreen .meta {
+  margin-left: 20px;   /* 左边缩进 20px，对齐图片 */
+  margin-right: 20px;
+}
+

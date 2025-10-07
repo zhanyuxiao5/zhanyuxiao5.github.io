@@ -1,0 +1,284 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* 主容器 - 三栏布局 */
+.main-container {
+    display: grid;
+    grid-template-columns: 420px 1fr 420px; /* 左右等宽 */
+    min-height: 100vh;
+    position: relative;
+}
+
+/* 左侧信息栏 */
+.left-panel {
+    padding: 40px 30px;
+    background: #ffffff;
+    position: relative;
+    border-right: 1px solid #e0e0e0;
+}
+
+.portfolio-title {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #333;
+    margin-bottom: 60px;
+    letter-spacing: 1px;
+}
+
+.contact-info {
+    margin-bottom: 60px;
+}
+
+.contact-item {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.contact-item a {
+    color: #333;
+    text-decoration: none;
+}
+
+.contact-item a:hover {
+    color: #666;
+}
+
+.project-description {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: #555;
+    text-align: justify;
+}
+
+/* 中间作品展示区域 */
+.center-panel {
+    padding: 40px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.category-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    color: #999;
+    cursor: pointer;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.tab-btn.active {
+    color: #333;
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #333;
+}
+
+.works-container {
+    flex: 1;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+}
+
+.work-item {
+    margin-bottom: 60px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.work-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.work-display {
+    width: 100%;
+    /* 不固定高度，随图片原始高度自适应 */
+    background: #f8f8f8;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: visible;
+}
+
+.work-image {
+    max-width: 100%;
+    height: auto; /* 按原始宽高比显示 */
+    object-fit: contain; /* 防止被裁切 */
+    transition: opacity 0.3s ease;
+    display: block;
+}
+
+.work-info {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: #555;
+    text-align: justify;
+}
+
+/* 滚动条样式 */
+.works-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.works-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.works-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.works-container::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+
+/* 右侧简历栏 */
+.right-panel {
+    padding: 40px 30px;
+    background: #ffffff;
+    border-left: 1px solid #e0e0e0;
+    position: sticky; /* 视口内固定位置 */
+    top: 0;
+    max-height: 100vh; /* 占满视口高度 */
+    overflow-y: auto;  /* 独立滚动 */
+}
+
+/* 右侧滚动条样式 */
+.right-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.right-panel::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.right-panel::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.right-panel::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+
+.cv-title {
+    font-size: 1rem;
+    font-weight: 300;
+    color: #333;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+.cv-section {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e0e0e0;
+    display: grid;               /* 两列布局：左侧1/4，右侧3/4 */
+    grid-template-columns: 1fr 3fr;
+    column-gap: 24px;
+}
+
+.cv-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.cv-section-title {
+    grid-column: 1;
+    font-size: 0.85rem;
+    color: #333;
+    margin-bottom: 0;
+    font-weight: 600;
+    align-self: start;
+}
+
+.cv-item {
+    grid-column: 2;
+    margin-bottom: 18px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; /* 打字机风格 */
+    font-size: 0.8rem;
+    color: #2f2f2f;
+    line-height: 1.6;
+}
+
+.cv-item-title {
+    color: #222;
+    font-weight: 600;
+    font-style: italic; /* (upcoming) 等效果 */
+    display: inline;
+    margin-right: 6px;
+}
+
+.cv-item-subtitle {
+    color: #4a4a4a;
+    font-size: 0.78rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .main-container {
+        grid-template-columns: 320px 1fr 320px; /* 左右等宽 */
+    }
+
+    .left-panel,
+    .right-panel {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+
+    .left-panel,
+    .right-panel {
+        border: none;
+        padding: 20px;
+    }
+
+    .category-tabs {
+        justify-content: center;
+    }
+
+    /* 小屏下关闭右侧独立滚动，恢复正常流式布局 */
+    .right-panel {
+        position: static;
+        max-height: none;
+        overflow: visible;
+    }
+}
+
