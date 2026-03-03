@@ -207,7 +207,7 @@ const worksData = {
     ]
 };
 
-let currentCategory = 'design';
+let currentCategory = 'computational';
 
 document.addEventListener('DOMContentLoaded', () => {
     loadWorks(currentCategory);
