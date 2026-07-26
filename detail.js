@@ -3,6 +3,19 @@ function getParam(name) {
     return url.searchParams.get(name) || '';
 }
 
+function getRouteProject() {
+    const match = window.location.pathname.match(/\/projects\/([^/]+)\/?$/);
+    if (!match || typeof worksData === 'undefined') return null;
+
+    const slug = decodeURIComponent(match[1]);
+    for (const [category, projects] of Object.entries(worksData)) {
+        const project = projects.find(item => item.slug === slug);
+        if (project) return { ...project, category };
+    }
+
+    return null;
+}
+
 const defaults = {
     title: 'project',
     src: '',
@@ -51,19 +64,22 @@ function parseImagesParam() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const titleParam = getParam('title') || defaults.title;
+    const routeProject = getRouteProject();
+    const titleParam = routeProject?.title || getParam('title') || defaults.title;
     const galleryImages = parseImagesParam();
-    const finalGallery = galleryImages.length ? galleryImages : defaults.gallery;
-    const srcParam = getParam('src') || finalGallery[0] || defaults.src;
-    const altParam = getParam('alt') || defaults.alt || titleParam;
-    const descParam = getParam('desc') || defaults.desc;
+    const rawGallery = routeProject?.detailImages || (galleryImages.length ? galleryImages : defaults.gallery);
+    const assetPath = path => routeProject && path ? `../../${path}` : path;
+    const finalGallery = rawGallery.map(assetPath);
+    const srcParam = assetPath(routeProject?.src) || getParam('src') || finalGallery[0] || defaults.src;
+    const altParam = routeProject?.alt || getParam('alt') || defaults.alt || titleParam;
+    const descParam = routeProject?.description || getParam('desc') || defaults.desc;
     const creditParam = getParam('credit') || defaults.credit;
 
     const heroWrapper = document.querySelector('.hero');
     const heroImg = document.getElementById('hero');
     const videoSrc = projectVideos[titleParam];
     
-    const categoryParam = getParam('category');   // ✅ 读取分类
+    const categoryParam = routeProject?.category || getParam('category');   // ✅ 读取分类
     const pageFrame = document.querySelector('.page-frame');
     if (categoryParam === 'design') {
         pageFrame.classList.add('fullscreen');   // ✅ 如果是 design，加上特殊 class
@@ -88,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         heroWrapper.style.display = 'none';
     }
     document.getElementById('docTitle').textContent = titleParam;
+    document.title = `${titleParam} — Yuxiao Zhan`;
     const descWrapper = document.querySelector('.content');
     const descEl = document.getElementById('desc');
     if (descParam) {
