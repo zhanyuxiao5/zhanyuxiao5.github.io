@@ -53,6 +53,27 @@ body {
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
 }
 
+.project-video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+    border: 0;
+    background: #000;
+}
+
+.reveal-item {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+        opacity 0.65s ease var(--reveal-delay, 0ms),
+        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+}
+
+.reveal-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .credit {
     text-align: center;
     font-size: 12px;
@@ -84,6 +105,14 @@ body {
 @media (max-width: 768px) {
     .page-title { font-size: 64px; }
     .page-frame { padding: 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal-item {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }
 
 /* ===========================
@@ -139,4 +168,3 @@ body {
   margin-left: 20px;   /* 左边缩进 20px，对齐图片 */
   margin-right: 20px;
 }
-

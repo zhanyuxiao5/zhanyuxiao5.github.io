@@ -134,8 +134,47 @@ body {
     max-width: 100%;
     height: auto; /* 按原始宽高比显示 */
     object-fit: contain; /* 防止被裁切 */
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
     display: block;
+}
+
+.work-item a .work-display {
+    overflow: hidden;
+}
+
+.work-item a:hover .work-image,
+.work-item a:focus-visible .work-image {
+    transform: scale(1.025);
+}
+
+.reveal-item {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+        opacity 0.65s ease var(--reveal-delay, 0ms),
+        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+}
+
+.reveal-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .work-image {
+        transition: none;
+    }
+
+    .work-item a:hover .work-image,
+    .work-item a:focus-visible .work-image {
+        transform: none;
+    }
+
+    .reveal-item {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }
 
 .work-info {
@@ -281,4 +320,3 @@ body {
         overflow: visible;
     }
 }
-

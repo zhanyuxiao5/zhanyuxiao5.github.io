@@ -209,8 +209,46 @@ const worksData = {
 
 let currentCategory = 'computational';
 
+const revealObserver = 'IntersectionObserver' in window
+    ? new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -24px' })
+    : null;
+
+function observeRevealElements(scope = document) {
+    const selector = [
+        '.portfolio-title',
+        '.contact-item',
+        '.project-description p',
+        '.category-tabs',
+        '.work-display',
+        '.work-info',
+        '.cv-title',
+        '.cv-section-title',
+        '.cv-item'
+    ].join(',');
+
+    scope.querySelectorAll(selector).forEach((element, index) => {
+        if (element.classList.contains('reveal-item')) return;
+        element.classList.add('reveal-item');
+        element.style.setProperty('--reveal-delay', `${Math.min(index % 4, 3) * 45}ms`);
+
+        if (revealObserver) {
+            revealObserver.observe(element);
+        } else {
+            element.classList.add('is-visible');
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     loadWorks(currentCategory);
+    observeRevealElements();
 
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', function () {
@@ -266,6 +304,7 @@ function loadWorks(category) {
         }
 
         worksContainer.appendChild(workItem);
+        observeRevealElements(workItem);
     });
 
     worksContainer.scrollTop = 0;
@@ -304,4 +343,3 @@ function loadWorks(category) {
 
 //     worksContainer.scrollTop = 0;
 // }
-

@@ -12,6 +12,32 @@ const defaults = {
     gallery: []
 };
 
+const projectVideos = {
+    'Slow Change': 'https://player.vimeo.com/video/1117334074?badge=0&autopause=0&player_id=0&app_id=58479'
+};
+
+const detailRevealObserver = 'IntersectionObserver' in window
+    ? new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -24px' })
+    : null;
+
+function observeDetailReveal(element, delay = 0) {
+    element.classList.add('reveal-item');
+    element.style.setProperty('--reveal-delay', `${delay}ms`);
+
+    if (detailRevealObserver) {
+        detailRevealObserver.observe(element);
+    } else {
+        element.classList.add('is-visible');
+    }
+}
+
 function parseImagesParam() {
     const url = new URL(window.location.href);
     const imagesParam = url.searchParams.get('images');
@@ -35,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const heroWrapper = document.querySelector('.hero');
     const heroImg = document.getElementById('hero');
+    const videoSrc = projectVideos[titleParam];
     
     const categoryParam = getParam('category');   // ✅ 读取分类
     const pageFrame = document.querySelector('.page-frame');
@@ -42,7 +69,18 @@ document.addEventListener('DOMContentLoaded', () => {
         pageFrame.classList.add('fullscreen');   // ✅ 如果是 design，加上特殊 class
     }
 
-    if (srcParam) {
+    if (videoSrc) {
+        heroImg.remove();
+        const videoFrame = document.createElement('iframe');
+        videoFrame.className = 'project-video';
+        videoFrame.src = videoSrc;
+        videoFrame.title = titleParam;
+        videoFrame.allow = 'autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share';
+        videoFrame.referrerPolicy = 'strict-origin-when-cross-origin';
+        videoFrame.allowFullscreen = true;
+        heroWrapper.appendChild(videoFrame);
+        heroWrapper.style.display = '';
+    } else if (srcParam) {
         // heroImg.src = srcParam;
         // heroImg.alt = altParam;
         heroWrapper.style.display = '';
@@ -71,9 +109,15 @@ document.addEventListener('DOMContentLoaded', () => {
         img.src = imageSrc;
         img.alt = titleParam || 'detail image';
         galleryContainer.appendChild(img);
+        observeDetailReveal(img);
     });
     if (!finalGallery.length) {
         galleryContainer.style.display = 'none';
     }
-});
 
+    document.querySelectorAll('.page-title, .meta, .hero, .credit, .content').forEach((element, index) => {
+        if (getComputedStyle(element).display !== 'none') {
+            observeDetailReveal(element, Math.min(index, 3) * 45);
+        }
+    });
+});
