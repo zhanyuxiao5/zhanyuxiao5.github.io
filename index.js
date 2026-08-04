@@ -1,4 +1,20 @@
 const worksData = {
+    photography: [
+        {
+            src: 'photography and moving image/covers/casildart-gallery.jpg',
+            slug: 'casildart-gallery',
+            alt: 'CasildArt Gallery exhibition photography',
+            title: 'CasildArt Gallery',
+            description: ''
+        },
+        {
+            src: 'photography and moving image/covers/hackney-gallery.jpg',
+            slug: 'hackney-gallery',
+            alt: 'Hackney Gallery exhibition photography',
+            title: 'Hackney Gallery',
+            description: ''
+        }
+    ],
     design: [
         {
             src: 'design/1/design1.jpeg',
@@ -272,11 +288,11 @@ document.addEventListener('DOMContentLoaded', () => {
     loadWorks(currentCategory);
     observeRevealElements();
 
-    document.querySelectorAll('.tab-btn').forEach(btn => {
+    document.querySelectorAll('button.tab-btn').forEach(btn => {
         btn.addEventListener('click', function () {
             const category = this.dataset.category;
 
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('button.tab-btn').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
 
             loadWorks(category);
