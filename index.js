@@ -5,7 +5,8 @@ const worksData = {
             slug: 'casildart-gallery',
             alt: 'CasildArt Gallery exhibition photography',
             title: 'CasildArt Gallery',
-            description: ''
+            description: '',
+            detailPage: true
         },
         {
             src: 'photography and moving image/covers/hackney-gallery.jpg',
@@ -322,7 +323,7 @@ function loadWorks(category) {
         params.set('category', category);//design的
 
         // ✅ 判断：如果有 detailImages → 生成带链接的详情页
-        if (work.detailImages && work.detailImages.length) {
+        if ((work.detailImages && work.detailImages.length) || work.detailPage) {
             workItem.innerHTML = `
                 <a href="projects/${work.slug}/" style="text-decoration:none; color: inherit; display:block;">
                     <div class="work-display">
