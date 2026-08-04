@@ -200,7 +200,7 @@ const worksData = {
             description: '《落花吟之一》, 160 × 120 cm, Oil on canvas, 2024 · 《落花吟之二》, 30 × 60 cm, Oil on canvas, 2024'
         },
         {
-            src: 'fine arts/drawing2.jpeg',
+            src: 'fine arts/drawing2.jpeg?v=20260804-2',
             slug: 'man-yan',
             alt: 'Fine art painting 蔓延',
             title: '蔓延',
