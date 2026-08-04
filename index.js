@@ -5,7 +5,7 @@ const worksData = {
             slug: 'casildart-gallery',
             alt: 'CasildArt Gallery exhibition photography',
             title: 'CasildArt Gallery',
-            description: '',
+            description: 'An exhibition documentation project combining photography, videography and editing to capture the installation process, artworks, artist conversations and interviews.',
             detailPage: true
         },
         {
@@ -322,6 +322,11 @@ function loadWorks(category) {
         }
         params.set('category', category);//design的
 
+        const workDetails = `
+            <div class="work-info">${work.description}</div>
+            ${work.metadata ? `<div class="work-metadata">${work.metadata}</div>` : ''}
+        `;
+
         // ✅ 判断：如果有 detailImages → 生成带链接的详情页
         if ((work.detailImages && work.detailImages.length) || work.detailPage) {
             workItem.innerHTML = `
@@ -329,7 +334,7 @@ function loadWorks(category) {
                     <div class="work-display">
                         <img class="work-image" src="${work.src}" alt="${work.alt}" />
                     </div>
-                    <div class="work-info">${work.description}</div>
+                    ${workDetails}
                 </a>
             `;
         } else {
@@ -338,7 +343,7 @@ function loadWorks(category) {
                 <div class="work-display">
                     <img class="work-image" src="${work.src}" alt="${work.alt}" />
                 </div>
-                <div class="work-info">${work.description}</div>
+                ${workDetails}
             `;
         }
 
