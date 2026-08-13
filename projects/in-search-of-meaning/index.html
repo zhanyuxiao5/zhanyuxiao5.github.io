@@ -1,30 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Work Detail</title>
-    <link rel="stylesheet" href="../../detail.css?v=20260809-1" />
-    <script defer src="../../index.js"></script>
-    <script defer src="../../detail.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project — Yuxiao Zhan</title>
+    <link rel="stylesheet" href="../../project-shell.css?v=20260813-1">
+    <link rel="stylesheet" href="../../detail.css?v=20260813-1">
+    <script defer src="../../index.js?v=20260813-1"></script>
+    <script defer src="../../project-shell.js?v=20260813-1"></script>
+    <script defer src="../../detail.js?v=20260813-1"></script>
 </head>
 <body>
-    <div class="page-frame">
-        <div class="page-title">Documentation</div>
-        <div class="meta">
-            <div>
-                <div class="doc-title" id="docTitle">project</div>
-            </div>
-        </div>
+    <div id="project-header"></div>
+    <main>
+        <div id="project-intro"></div>
 
-        <div class="hero">
-            <img id="hero" src="" alt="" />
-        </div>
-        <div class="credit" id="credit"></div>
-        <div class="content">
-            <p id="desc"></p>
-        </div>
-        <div class="gallery" id="gallery"></div>
-    </div>
+        <article class="project-content generic-project-content">
+            <section aria-labelledby="project-documentation-title">
+                <header class="project-section-heading" data-project-reveal>
+                    <p class="project-section-number">01</p>
+                    <div>
+                        <h2 id="project-documentation-title">Documentation</h2>
+                        <p>Project images, process and outcomes.</p>
+                    </div>
+                </header>
+                <div class="generic-project-gallery" id="generic-project-gallery"></div>
+            </section>
+        </article>
+
+        <div id="project-credits"></div>
+        <div id="project-navigation"></div>
+    </main>
 </body>
 </html>
