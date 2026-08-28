@@ -49,20 +49,18 @@ function ProjectIntro(data) {
     section.setAttribute('aria-labelledby', 'project-title');
 
     const heading = document.createElement('div');
-    const category = document.createElement('p');
     const title = document.createElement('h1');
-    category.className = 'project-eyebrow';
-    category.textContent = data.category;
     title.className = 'project-title';
     title.id = 'project-title';
     title.textContent = data.title;
-    heading.append(category, title);
+    heading.append(title);
 
     const description = document.createElement('p');
     description.className = 'project-description';
     description.textContent = data.description;
 
-    section.append(heading, description, ProjectMeta(data.meta));
+    heading.append(description);
+    section.append(heading);
     return section;
 }
 
@@ -119,7 +117,7 @@ function renderProjectShell(data) {
     const navigationMount = document.getElementById('project-navigation');
     headerMount?.replaceWith(ProjectHeader(data));
     introMount?.replaceWith(ProjectIntro(data));
-    const credits = ProjectCredits(data.credits);
+    const credits = ProjectCredits([...(data.meta || []), ...(data.credits || [])]);
     if (credits) creditsMount?.replaceWith(credits); else creditsMount?.remove();
     navigationMount?.replaceWith(ProjectNavigation(data));
     document.title = `${data.title} — Yuxiao Zhan`;

@@ -14,18 +14,8 @@ function projectCategoryLabel(category) {
         computational: 'Computational Arts',
         design: 'Design',
         fineart: 'Fine Art',
-        photography: 'Photography & Moving Image'
+        photography: 'Photography & Video'
     }[category] || category;
-}
-
-function fineArtMetadata(description) {
-    const items = [{ label: 'Discipline', value: 'Fine Art' }];
-    const dimensions = description.match(/\d+\s*[×x]\s*\d+\s*cm/i);
-    const year = description.match(/\b(19|20)\d{2}\b/);
-    if (/oil on canvas/i.test(description)) items.push({ label: 'Medium', value: 'Oil on canvas' });
-    if (dimensions) items.push({ label: 'Dimensions', value: dimensions[0].replace(/x/i, '×') });
-    if (year) items.push({ label: 'Year', value: year[0] });
-    return items;
 }
 
 function allRoutedProjects() {
@@ -54,9 +44,10 @@ function makeProjectData(route) {
         category: projectCategoryLabel(category),
         description: project.description,
         homeUrl: '../../index.html',
-        meta: category === 'fineart'
-            ? fineArtMetadata(project.description)
-            : [{ label: 'Discipline', value: projectCategoryLabel(category) }],
+        meta: [
+                { label: 'Medium', value: project.media || projectCategoryLabel(category) },
+                { label: 'Year', value: project.year }
+            ].filter(item => item.value),
         credits: [{ label: category === 'design' ? 'Designer' : 'Artist', value: 'Yuxiao Zhan' }],
         previous: navigation.previous,
         next: navigation.next
@@ -82,15 +73,7 @@ function renderProjectMedia(route) {
         gallery.appendChild(figure);
     });
 
-    const heading = document.querySelector('.project-section-heading h2');
-    const supporting = document.querySelector('.project-section-heading p:last-child');
-    if (category === 'fineart') {
-        heading.textContent = 'Artwork';
-        supporting.textContent = 'Artwork documentation.';
-    } else if (category === 'design') {
-        heading.textContent = 'Project Documentation';
-        supporting.textContent = 'Visual development, research and project outcomes.';
-    }
+    document.querySelector('.generic-project-content .project-section-heading')?.remove();
 }
 
 document.addEventListener('DOMContentLoaded', () => {

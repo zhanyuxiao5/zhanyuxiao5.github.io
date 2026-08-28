@@ -53,15 +53,13 @@ figure { margin: 0; }
 .project-intro {
     width: var(--project-page);
     margin: 0 auto;
-    padding: clamp(72px, 10vw, 152px) 0 clamp(64px, 9vw, 128px);
-    display: grid;
-    grid-template-columns: 1.25fr .85fr .65fr;
-    gap: clamp(32px, 5vw, 88px);
-    align-items: start;
+    padding: clamp(56px, 7vw, 104px) 0 clamp(48px, 6vw, 88px);
 }
 
+.project-intro > div { max-width: 100%; }
+
 .project-eyebrow {
-    margin: 0 0 24px;
+    margin: 0 0 18px;
     color: var(--project-muted);
     font-size: .7rem;
     letter-spacing: .16em;
@@ -70,23 +68,19 @@ figure { margin: 0; }
 
 .project-title {
     margin: 0;
-    max-width: 11ch;
-    font-size: clamp(2.6rem, 5vw, 5.5rem);
+    max-width: none;
+    font-size: 2.625rem;
     font-weight: 400;
-    line-height: .98;
-    letter-spacing: -.045em;
-    overflow-wrap: anywhere;
+    line-height: 1.1;
+    letter-spacing: -.03em;
+    overflow-wrap: normal;
 }
 
 .project-description {
-    max-width: 35rem;
-    margin: 42px 0 0;
+    max-width: 780px;
+    margin: clamp(24px, 3vw, 38px) 0 0;
     font-size: .94rem;
     text-wrap: pretty;
-}
-
-.project-meta {
-    margin: 42px 0 0;
 }
 
 .project-meta div {
@@ -191,9 +185,6 @@ figure { margin: 0; }
 
 @media (max-width: 1024px) {
     :root { --project-page: min(90vw, 920px); }
-    .project-intro { grid-template-columns: 1.2fr .8fr; }
-    .project-meta { grid-column: 1 / -1; margin-top: 0; display: grid; grid-template-columns: repeat(3, 1fr); }
-    .project-meta div { padding-right: 24px; }
 }
 
 @media (max-width: 700px) {
@@ -201,10 +192,9 @@ figure { margin: 0; }
     .project-site-header { min-height: 68px; }
     .project-site-name { font-size: .82rem; }
     .project-back-link { font-size: .68rem; }
-    .project-intro { padding: 64px 0 72px; display: block; }
-    .project-title { max-width: 100%; font-size: clamp(2.7rem, 13vw, 4rem); overflow-wrap: normal; }
-    .project-description { margin-top: 48px; }
-    .project-meta { display: block; margin-top: 48px; }
+    .project-intro { padding: 48px 0 56px; }
+    .project-title { max-width: 100%; font-size: 2rem; overflow-wrap: normal; }
+    .project-description { margin-top: 24px; }
     .project-section-heading { display: block; margin-bottom: 40px; }
     .project-section-number { margin-bottom: 12px; }
     .project-credits { display: block; }

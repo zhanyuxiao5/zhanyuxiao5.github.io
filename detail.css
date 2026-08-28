@@ -1,5 +1,5 @@
 .generic-project-content {
-    padding-top: clamp(24px, 4vw, 64px);
+    padding-top: 0;
 }
 
 .generic-project-gallery {

@@ -70,7 +70,11 @@ body {
 }
 
 .contact-info {
-    margin-bottom: 60px;
+    margin-bottom: 0;
+}
+
+.is-temporarily-hidden {
+    display: none;
 }
 
 .contact-item {
@@ -161,7 +165,7 @@ body {
     width: 100%;
     /* 不固定高度，随图片原始高度自适应 */
     background: #f8f8f8;
-    margin-bottom: 30px;
+    margin-bottom: 18px;
     position: relative;
     overflow: visible;
 }
@@ -213,20 +217,23 @@ body {
     }
 }
 
-.work-info {
-    font-size: 0.85rem;
-    line-height: 1.8;
-    color: #555;
-    text-align: justify;
+.work-details {
+    text-align: left;
 }
 
-.work-metadata {
-    margin-top: 12px;
-    color: #888;
-    font-size: 0.72rem;
-    line-height: 1.8;
-    letter-spacing: 0.01em;
-    text-align: justify;
+.work-title {
+    color: #333;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.work-meta {
+    margin-top: 4px;
+    color: #777;
+    font-size: 0.78rem;
+    font-weight: 400;
+    line-height: 1.5;
 }
 
 /* 右侧简历栏 */
@@ -320,11 +327,6 @@ body {
 
     .category-tabs {
         justify-content: center;
-    }
-
-    .work-metadata {
-        margin-top: 10px;
-        font-size: 0.7rem;
     }
 
     /* 小屏下关闭右侧独立滚动，恢复正常流式布局 */
