@@ -18,12 +18,17 @@ function makeLink(className, href, label, text) {
     return link;
 }
 
+function projectReturnUrl(homeUrl) {
+    const separator = homeUrl.includes('?') ? '&' : '?';
+    return `${homeUrl}${separator}returnToProject=1`;
+}
+
 function ProjectHeader(data) {
     const header = document.createElement('header');
     header.className = 'project-site-header';
     header.append(
         makeLink('project-site-name', data.homeUrl, '', "Yuxiao's portfolio"),
-        makeLink('project-back-link', data.homeUrl, '', 'Back to projects')
+        makeLink('project-back-link', projectReturnUrl(data.homeUrl), '', 'Back to projects')
     );
     return header;
 }
@@ -87,7 +92,7 @@ function ProjectNavigation(data) {
     nav.setAttribute('aria-label', 'Project navigation');
     nav.append(
         makeLink('project-previous', data.previous.url, 'Previous project', data.previous.title),
-        makeLink('project-all', data.homeUrl, 'Back to', 'All projects'),
+        makeLink('project-all', projectReturnUrl(data.homeUrl), 'Back to', 'All projects'),
         makeLink('project-next', data.next.url, 'Next project', data.next.title)
     );
     return nav;

@@ -295,7 +295,50 @@ const worksData = {
     ]
 };
 
+const projectReturnStorageKey = 'portfolioProjectReturn';
 let currentCategory = 'computational';
+
+function readProjectReturnState() {
+    try {
+        const state = JSON.parse(sessionStorage.getItem(projectReturnStorageKey));
+        if (!state || !worksData[state.category]?.some(work => work.slug === state.slug)) return null;
+        return state;
+    } catch (error) {
+        return null;
+    }
+}
+
+function saveProjectReturnState(category, slug, scrollTop) {
+    try {
+        sessionStorage.setItem(projectReturnStorageKey, JSON.stringify({ category, slug, scrollTop }));
+    } catch (error) {
+        // Navigation still works normally when storage is unavailable.
+    }
+}
+
+function clearProjectReturnState() {
+    try { sessionStorage.removeItem(projectReturnStorageKey); }
+    catch (error) { /* Storage may be unavailable in privacy-restricted contexts. */ }
+}
+
+function restoreProjectCard(state) {
+    const worksContainer = document.getElementById('worksContainer');
+    if (!worksContainer || !state) return;
+
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+        const target = Array.from(worksContainer.children)
+            .find(item => item.dataset.projectSlug === state.slug);
+        if (!target) return;
+
+        const containerRect = worksContainer.getBoundingClientRect();
+        const targetRect = target.getBoundingClientRect();
+        const centeredTop = worksContainer.scrollTop
+            + targetRect.top
+            - containerRect.top
+            - Math.max(0, (worksContainer.clientHeight - targetRect.height) / 2);
+        worksContainer.scrollTo({ top: Math.max(0, centeredTop), behavior: 'auto' });
+    }));
+}
 
 const revealObserver = 'IntersectionObserver' in window
     ? new IntersectionObserver((entries, observer) => {
@@ -338,7 +381,21 @@ function observeRevealElements(scope = document) {
 document.addEventListener('DOMContentLoaded', () => {
     if (!document.getElementById('worksContainer')) return;
 
+    const url = new URL(window.location.href);
+    const shouldRestoreProject = url.searchParams.get('returnToProject') === '1';
+    const returnState = shouldRestoreProject ? readProjectReturnState() : null;
+    if (returnState) currentCategory = returnState.category;
+
+    document.querySelectorAll('button.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.category === currentCategory);
+    });
     loadWorks(currentCategory);
+    if (returnState) restoreProjectCard(returnState);
+    if (shouldRestoreProject) {
+        clearProjectReturnState();
+        url.searchParams.delete('returnToProject');
+        history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+    }
     observeRevealElements();
 
     document.querySelectorAll('button.tab-btn').forEach(btn => {
@@ -363,6 +420,7 @@ function loadWorks(category) {
     works.forEach(work => {
         const workItem = document.createElement('div');
         workItem.className = 'work-item';
+        workItem.dataset.projectSlug = work.slug;
 
         const params = new URLSearchParams();
         params.set('src', work.src);
@@ -393,6 +451,9 @@ function loadWorks(category) {
                     ${workDetails}
                 </a>
             `;
+            workItem.querySelector('a').addEventListener('click', () => {
+                saveProjectReturnState(category, work.slug, worksContainer.scrollTop);
+            });
         } else {
             // ❌ 没有 detailImages（比如 fine art）→ 只展示，不跳转
             workItem.innerHTML = `
