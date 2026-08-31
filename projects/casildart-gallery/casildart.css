@@ -199,7 +199,7 @@ figcaption { margin-top: 12px; color: var(--muted); font-size: .72rem; letter-sp
     grid-template-columns: repeat(3, 1fr);
     border-top: 1px solid var(--line);
 }
-.project-navigation a { min-width: 0; padding: 40px 4vw; display: flex; flex-direction: column; justify-content: center; text-decoration: none; font-size: 1rem; transition: background .25s ease; }
+.project-navigation a { min-width: 0; padding: 40px 4vw; display: flex; flex-direction: column; justify-content: flex-start; text-decoration: none; font-size: 1rem; transition: background .25s ease; }
 .project-navigation a:hover, .project-navigation a:focus-visible { background: #f7f7f7; }
 .project-navigation a + a { border-left: 1px solid var(--line); }
 .project-navigation span { color: var(--muted); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
@@ -237,8 +237,18 @@ figcaption { margin-top: 12px; color: var(--muted); font-size: .72rem; letter-sp
     .credits h2 { margin-bottom: 24px; }
     .credits dl { grid-template-columns: 1fr; }
     .project-navigation { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .project-navigation a { padding: 20px 12px; }
+    .project-navigation a { padding: 16px 10px; font-size: 0; }
     .project-navigation a + a { border-left: 1px solid var(--line); }
+    .project-navigation span { margin-bottom: 0; font-size: 0; }
+    .project-navigation span::after { font-size: .66rem; }
+    .project-navigation a:first-child span::after { content: 'Previous'; }
+    .project-navigation .all-projects span::after { content: 'All Projects'; }
+    .project-navigation .next-project span::after { content: 'Next'; }
+    .project-navigation a:first-child::after,
+    .project-navigation .next-project::after { margin-top: 5px; font-size: .9rem; line-height: 1; }
+    .project-navigation a:first-child::after { content: '←'; }
+    .project-navigation .next-project::after { content: '→'; }
+    .project-navigation .all-projects::after { content: ''; height: .9rem; margin-top: 5px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -162,7 +162,7 @@ figure { margin: 0; }
     padding: 40px 4vw;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     text-decoration: none;
     font-size: 1rem;
     transition: background .25s ease;
@@ -201,8 +201,18 @@ figure { margin: 0; }
     .project-credits h2 { margin-bottom: 24px; }
     .project-credits dl { grid-template-columns: 1fr; }
     .project-navigation { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .project-navigation a { padding: 20px 12px; }
+    .project-navigation a { padding: 16px 10px; font-size: 0; }
     .project-navigation a + a { border-left: 1px solid var(--project-line); }
+    .project-navigation span { margin-bottom: 0; font-size: 0; }
+    .project-navigation span::after { font-size: .66rem; }
+    .project-navigation .project-previous span::after { content: 'Previous'; }
+    .project-navigation .project-all span::after { content: 'All Projects'; }
+    .project-navigation .project-next span::after { content: 'Next'; }
+    .project-navigation .project-previous::after,
+    .project-navigation .project-next::after { margin-top: 5px; font-size: .9rem; line-height: 1; }
+    .project-navigation .project-previous::after { content: '←'; }
+    .project-navigation .project-next::after { content: '→'; }
+    .project-navigation .project-all::after { content: ''; height: .9rem; margin-top: 5px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
