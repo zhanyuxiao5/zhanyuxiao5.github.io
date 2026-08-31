@@ -49,11 +49,14 @@ function ProjectIntro(data) {
     section.setAttribute('aria-labelledby', 'project-title');
 
     const heading = document.createElement('div');
+    const category = document.createElement('p');
     const title = document.createElement('h1');
+    category.className = 'project-eyebrow';
+    category.textContent = data.category;
     title.className = 'project-title';
     title.id = 'project-title';
     title.textContent = data.title;
-    heading.append(title);
+    heading.append(category, title);
 
     const description = document.createElement('p');
     description.className = 'project-description';
