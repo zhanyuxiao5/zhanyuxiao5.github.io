@@ -298,22 +298,38 @@ const worksData = {
 const projectReturnStorageKey = 'portfolioProjectReturn';
 let currentCategory = 'computational';
 
+function isValidProjectReturnState(state) {
+    return Boolean(state && worksData[state.category]?.some(work => work.slug === state.slug));
+}
+
 function readProjectReturnState() {
     try {
         const state = JSON.parse(sessionStorage.getItem(projectReturnStorageKey));
-        if (!state || !worksData[state.category]?.some(work => work.slug === state.slug)) return null;
-        return state;
+        return isValidProjectReturnState(state) ? state : null;
     } catch (error) {
         return null;
     }
 }
 
+function readHistoryProjectReturnState() {
+    const state = history.state?.[projectReturnStorageKey];
+    return isValidProjectReturnState(state) ? state : null;
+}
+
 function saveProjectReturnState(category, slug, scrollTop) {
+    const state = { category, slug, scrollTop };
     try {
-        sessionStorage.setItem(projectReturnStorageKey, JSON.stringify({ category, slug, scrollTop }));
+        sessionStorage.setItem(projectReturnStorageKey, JSON.stringify(state));
     } catch (error) {
         // Navigation still works normally when storage is unavailable.
     }
+
+    const currentHistoryState = history.state && typeof history.state === 'object' ? history.state : {};
+    history.replaceState(
+        { ...currentHistoryState, [projectReturnStorageKey]: state },
+        '',
+        window.location.href
+    );
 }
 
 function clearProjectReturnState() {
@@ -338,6 +354,17 @@ function restoreProjectCard(state) {
             - Math.max(0, (worksContainer.clientHeight - targetRect.height) / 2);
         worksContainer.scrollTo({ top: Math.max(0, centeredTop), behavior: 'auto' });
     }));
+}
+
+function restoreHomepageProject(state) {
+    if (!isValidProjectReturnState(state) || !document.getElementById('worksContainer')) return false;
+    currentCategory = state.category;
+    document.querySelectorAll('button.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.category === currentCategory);
+    });
+    loadWorks(currentCategory);
+    restoreProjectCard(state);
+    return true;
 }
 
 const revealObserver = 'IntersectionObserver' in window
@@ -383,18 +410,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const url = new URL(window.location.href);
     const shouldRestoreProject = url.searchParams.get('returnToProject') === '1';
-    const returnState = shouldRestoreProject ? readProjectReturnState() : null;
-    if (returnState) currentCategory = returnState.category;
+    const returnState = readHistoryProjectReturnState()
+        || (shouldRestoreProject ? readProjectReturnState() : null);
 
-    document.querySelectorAll('button.tab-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.category === currentCategory);
-    });
-    loadWorks(currentCategory);
-    if (returnState) restoreProjectCard(returnState);
+    if (!restoreHomepageProject(returnState)) loadWorks(currentCategory);
     if (shouldRestoreProject) {
         clearProjectReturnState();
         url.searchParams.delete('returnToProject');
-        history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+        history.replaceState(history.state, '', `${url.pathname}${url.search}${url.hash}`);
     }
     observeRevealElements();
 
@@ -409,6 +432,14 @@ document.addEventListener('DOMContentLoaded', () => {
             currentCategory = category;
         });
     });
+});
+
+window.addEventListener('pageshow', event => {
+    if (event.persisted) restoreHomepageProject(readHistoryProjectReturnState());
+});
+
+window.addEventListener('popstate', () => {
+    restoreHomepageProject(readHistoryProjectReturnState());
 });
 
 function loadWorks(category) {
