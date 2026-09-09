@@ -296,7 +296,7 @@ const worksData = {
 };
 
 const projectReturnStorageKey = 'portfolioProjectReturn';
-let currentCategory = 'computational';
+let currentCategory = 'design';
 
 function isValidProjectReturnState(state) {
     return Boolean(state && worksData[state.category]?.some(work => work.slug === state.slug));

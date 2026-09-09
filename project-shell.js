@@ -25,9 +25,12 @@ function projectReturnUrl(homeUrl) {
 
 function ProjectHeader(data) {
     const header = document.createElement('header');
+    const siteName = document.createElement('span');
     header.className = 'project-site-header';
+    siteName.className = 'project-site-name';
+    siteName.textContent = "Yuxiao's portfolio";
     header.append(
-        makeLink('project-site-name', data.homeUrl, '', "Yuxiao's portfolio"),
+        siteName,
         makeLink('project-back-link', projectReturnUrl(data.homeUrl), '', 'Back to projects')
     );
     return header;

@@ -19,7 +19,7 @@ function projectCategoryLabel(category) {
 }
 
 function allRoutedProjects() {
-    const order = ['computational', 'design', 'photography'];
+    const order = ['design', 'computational', 'photography'];
     return order.flatMap(category => (worksData[category] || [])
         .filter(item => item.slug && (item.detailImages?.length || item.detailPage))
         .map(item => ({ ...item, category })));
