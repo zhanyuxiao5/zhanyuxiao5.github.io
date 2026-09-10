@@ -48,7 +48,13 @@ function makeProjectData(route) {
                 { label: 'Medium', value: project.media || projectCategoryLabel(category) },
                 { label: 'Year', value: project.year }
             ].filter(item => item.value),
-        credits: [{ label: category === 'design' ? 'Designer' : 'Artist', value: 'Yuxiao Zhan' }],
+        credits: [
+            { label: category === 'design' ? 'Designer' : 'Artist', value: 'Yuxiao Zhan' },
+            ...(project.collaborators?.length ? [{
+                label: project.collaborators.length > 1 ? 'Co-artists' : 'Co-artist',
+                value: project.collaborators.join(', ')
+            }] : [])
+        ],
         previous: navigation.previous,
         next: navigation.next
     };

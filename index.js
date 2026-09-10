@@ -138,6 +138,7 @@ const worksData = {
             title: 'EchoBloom',
             media: 'Interactive Audiovisual Work, Gesture Tracking, Creative Coding',
             year: '2025',
+            collaborators: ['Fangyue Zhu'],
             description: 'An interactive kaleidoscope that responds to hand gestures tracked in real-time with MediaPipe. By adjusting pinch distances, users can modulate both audio speed and dynamic visual effects. The project investigates the relationship between vision and sound, creating an immersive environment where light, color, and rhythm bloom through embodied interaction.',
             detailImages: [
                 'computational arts/3/详情页/EB1.jpg',
@@ -152,6 +153,7 @@ const worksData = {
             title: 'Boundary',
             media: 'Interactive Installation, Physical Computing, Networked Interaction',
             year: '2025',
+            collaborators: ['Fangyue Zhu'],
             description: 'An interactive installation that explores the dissolution of individuality within a collective network. Using smartphone sensors and real-time data transmission, individual movements are absorbed into a shared digital space where personal traces gradually merge. The work raises questions about technology’s role in shaping human interaction, reflecting on the tension between connection and the loss of self in an increasingly networked society.',
             detailImages: [
                 'computational arts/4/详情页/B1.jpg',
@@ -167,6 +169,7 @@ const worksData = {
             title: 'Robotised Life',
             media: 'Interactive Artwork, Creative Coding',
             year: '2024',
+            collaborators: ['Yangming Sun'],
             description: 'An interactive artwork that critiques industrial farming and its systematic suppression of animal freedom. Using p5.js, the project visualizes the density of caged chickens through dynamic graphics and sound. As the density slider increases, the screen fills with more chickens, whose condition deteriorates sharply, reflecting the irrationality of factory farming. By combining academic theory with interactive media, the work invites audiences to reflect on technological control over life, question the ethical legitimacy of industrial farming, and empathize with non-human beings.',
             detailImages: ['computational arts/5/详情页/R1.jpg']
         },
@@ -177,6 +180,7 @@ const worksData = {
             title: 'Wobbly World',
             media: 'Immersive Installation, Game Design, Sound',
             year: '2025',
+            collaborators: ['Ruilin Geng', 'Sting Wang', 'Yuan Yuan'],
             description: 'An immersive installation where audiences throw a small ball into a virtual space, each bounce triggering unique sounds and visuals. The project explores the idea of “invisible touch” by using auditory and visual feedback to simulate tactile sensations that VR often lacks. Without fixed goals, participants are invited to slow down, listen, and explore multiple whimsical rooms filled with geometric forms, playful rhythms, and dreamlike colors. Through this sensory journey, the work highlights the interplay of hearing, imagination, and perception.',
             detailImages: [
                 'computational arts/6/详情页/Wobbly World(1) copy_1_01.jpg',
