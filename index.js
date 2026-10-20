@@ -22,22 +22,6 @@ const worksData = {
     ],
     design: [
         {
-            src: 'design/1/design1.jpeg',
-            slug: 'design-01',
-            alt: 'Design project 1 hero image',
-            title: 'Ecofuturist Poultry: Reimagining Technology and Nature in Chicken Farming',
-            media: 'Speculative Design, Installation, Animation',
-            year: '2023',
-            description: 'This project imagines a future where chickens are raised in domestic spaces rather than industrial farms. Through animation and installation, it critiques the alienation caused by industrial agriculture and explores alternative scenarios such as lab-grown meat and city-integrated poultry, questioning how technology can coexist with nature.',
-            detailImages: [
-                'design/1/详情页/project1画板1.jpg',
-                'design/1/详情页/project1画板2.jpg',
-                'design/1/详情页/project1画板3.jpg',
-                'design/1/详情页/project1画板4.jpg',
-                'design/1/详情页/project1画板5.jpg'
-            ]
-        },
-        {
             src: 'design/2/design2.jpeg',
             slug: 'design-02',
             alt: 'Design project 2 hero image',
@@ -83,6 +67,22 @@ const worksData = {
                 'design/4/详情页/project4画板 4.jpg',
                 'design/4/详情页/project4画板 5.jpg'
             ]
+        },
+        {
+            src: 'design/1/design1.jpeg',
+            slug: 'design-01',
+            alt: 'Design project 1 hero image',
+            title: 'Ecofuturist Poultry: Reimagining Technology and Nature in Chicken Farming',
+            media: 'Speculative Design, Installation, Animation',
+            year: '2023',
+            description: 'This project imagines a future where chickens are raised in domestic spaces rather than industrial farms. Through animation and installation, it critiques the alienation caused by industrial agriculture and explores alternative scenarios such as lab-grown meat and city-integrated poultry, questioning how technology can coexist with nature.',
+            detailImages: [
+                'design/1/详情页/project1画板1.jpg',
+                'design/1/详情页/project1画板2.jpg',
+                'design/1/详情页/project1画板3.jpg',
+                'design/1/详情页/project1画板4.jpg',
+                'design/1/详情页/project1画板5.jpg'
+            ]
         }
     ],
     computational: [
@@ -103,16 +103,6 @@ const worksData = {
                 'computational arts/0/详情页/SL6.jpg',
                 'computational arts/0/详情页/SL7.jpg'
             ]
-        },
-        {
-            src: 'computational arts/1/in search of meaning.jpg',
-            slug: 'in-search-of-meaning',
-            alt: 'In Search of Meaning interactive web project',
-            title: 'In Search of Meaning',
-            media: 'Interactive Web Project, Creative Coding, Generative Text',
-            year: '2025',
-            description: 'An interactive web project where viewers freely draw on a digital canvas. Each drawing action triggers the generation of a short, dreamlike poem, but the text has no direct relation to the drawing itself. By breaking the expected link between action and outcome, the work invites audiences to reflect on process, rhythm, and attention, rather than on final results. It challenges the assumption that every action must produce a meaningful, visible effect, encouraging participants to find value in the act itself.',
-            detailImages: ['computational arts/1/详情页/ISOF.jpg']
         },
         {
             src: 'computational arts/2/collision of fates.jpeg',
@@ -163,17 +153,6 @@ const worksData = {
             ]
         },
         {
-            src: 'computational arts/5/Robtised life.jpeg',
-            slug: 'robotised-life',
-            alt: 'Robotised Life interactive artwork',
-            title: 'Robotised Life',
-            media: 'Interactive Artwork, Creative Coding',
-            year: '2024',
-            collaborators: ['Yangming Sun'],
-            description: 'An interactive artwork that critiques industrial farming and its systematic suppression of animal freedom. Using p5.js, the project visualizes the density of caged chickens through dynamic graphics and sound. As the density slider increases, the screen fills with more chickens, whose condition deteriorates sharply, reflecting the irrationality of factory farming. By combining academic theory with interactive media, the work invites audiences to reflect on technological control over life, question the ethical legitimacy of industrial farming, and empathize with non-human beings.',
-            detailImages: ['computational arts/5/详情页/R1.jpg']
-        },
-        {
             src: 'computational arts/6/woobly.JPG',
             slug: 'wobbly-world',
             alt: 'Wobbly World immersive installation',
@@ -206,6 +185,27 @@ const worksData = {
                 'computational arts/7/详情页/TPRY5.jpg',
                 'computational arts/7/详情页/TPRY6.jpg'
             ]
+        },
+        {
+            src: 'computational arts/1/in search of meaning.jpg',
+            slug: 'in-search-of-meaning',
+            alt: 'In Search of Meaning interactive web project',
+            title: 'In Search of Meaning',
+            media: 'Interactive Web Project, Creative Coding, Generative Text',
+            year: '2025',
+            description: 'An interactive web project where viewers freely draw on a digital canvas. Each drawing action triggers the generation of a short, dreamlike poem, but the text has no direct relation to the drawing itself. By breaking the expected link between action and outcome, the work invites audiences to reflect on process, rhythm, and attention, rather than on final results. It challenges the assumption that every action must produce a meaningful, visible effect, encouraging participants to find value in the act itself.',
+            detailImages: ['computational arts/1/详情页/ISOF.jpg']
+        },
+        {
+            src: 'computational arts/5/Robtised life.jpeg',
+            slug: 'robotised-life',
+            alt: 'Robotised Life interactive artwork',
+            title: 'Robotised Life',
+            media: 'Interactive Artwork, Creative Coding',
+            year: '2024',
+            collaborators: ['Yangming Sun'],
+            description: 'An interactive artwork that critiques industrial farming and its systematic suppression of animal freedom. Using p5.js, the project visualizes the density of caged chickens through dynamic graphics and sound. As the density slider increases, the screen fills with more chickens, whose condition deteriorates sharply, reflecting the irrationality of factory farming. By combining academic theory with interactive media, the work invites audiences to reflect on technological control over life, question the ethical legitimacy of industrial farming, and empathize with non-human beings.',
+            detailImages: ['computational arts/5/详情页/R1.jpg']
         },
         {
             src: 'computational arts/8/ex.png',
@@ -300,7 +300,7 @@ const worksData = {
 };
 
 const projectReturnStorageKey = 'portfolioProjectReturn';
-let currentCategory = 'design';
+let currentCategory = 'computational';
 
 function isValidProjectReturnState(state) {
     return Boolean(state && worksData[state.category]?.some(work => work.slug === state.slug));
@@ -475,7 +475,6 @@ function loadWorks(category) {
                 ${work.dimensions ? `<div class="work-meta">${work.dimensions}</div>` : ''}
             </div>
         `;
-
         // ✅ 判断：如果有 detailImages → 生成带链接的详情页
         if ((work.detailImages && work.detailImages.length) || work.detailPage) {
             workItem.innerHTML = `
