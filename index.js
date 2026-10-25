@@ -88,7 +88,7 @@ const worksData = {
     computational: [
         {
             src: 'computational arts/9/fish-cover.gif',
-            slug: 'fish-mobile',
+            slug: 'unbound',
             alt: 'Fish Mobile p5.js animation with glowing fish moving through an underwater scene',
             title: 'Unbound',
             media: 'p5.js, Creative Coding',
