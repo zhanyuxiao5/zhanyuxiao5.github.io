@@ -3,7 +3,7 @@
     --project-muted: #777;
     --project-line: #e5e5e5;
     --project-paper: #fff;
-    --project-page: min(88vw, 1440px);
+    --project-page: min(calc(100vw - 120px), 1800px);
 }
 
 * {
@@ -152,6 +152,9 @@ figure { margin: 0; }
 .project-credits dl { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 48px; }
 
 .project-navigation {
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     border-top: 1px solid var(--project-line);

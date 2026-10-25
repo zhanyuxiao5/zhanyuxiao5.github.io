@@ -49,6 +49,9 @@ body {
 .main-container {
     display: grid;
     grid-template-columns: 420px 1fr 420px; /* 左右等宽 */
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
     min-height: 100vh;
     position: relative;
 }
@@ -105,6 +108,7 @@ body {
     background: #ffffff;
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .category-tabs {

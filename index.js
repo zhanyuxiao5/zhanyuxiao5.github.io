@@ -87,6 +87,16 @@ const worksData = {
     ],
     computational: [
         {
+            src: 'computational arts/9/fish-cover.gif',
+            slug: 'fish-mobile',
+            alt: 'Fish Mobile p5.js animation with glowing fish moving through an underwater scene',
+            title: 'Unbound',
+            media: 'p5.js, Creative Coding',
+            year: '2026',
+            detailPage: true,
+            description: 'Unbound is a personal creative coding experiment exploring movement, space, and atmosphere through p5.js. Through experimenting with motion, composition, colour, and lighting, I explored how these elements work together to create a sense of depth and fluidity, transforming a simple idea into an immersive and dreamlike visual experience.'
+        },
+        {
             src: 'computational arts/0/slow change.jpeg',
             slug: 'slow-change',
             alt: 'Slow Change installation overview',

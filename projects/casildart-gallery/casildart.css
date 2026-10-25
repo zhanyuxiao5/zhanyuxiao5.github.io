@@ -3,7 +3,7 @@
     --muted: #777;
     --line: #e5e5e5;
     --paper: #fff;
-    --page: min(88vw, 1440px);
+    --page: min(calc(100vw - 120px), 1800px);
 }
 
 * {
@@ -74,7 +74,7 @@ h1 em { font-weight: 400; }
 dt { color: var(--muted); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
 dd { margin: 3px 0 0; font-size: .82rem; }
 
-.hero-image { width: 100%; }
+.hero-image { width: min(100%, 1800px); margin-left: auto; margin-right: auto; }
 .hero-image img { max-height: 92vh; object-fit: cover; }
 
 .chapter {
@@ -195,6 +195,10 @@ figcaption { margin-top: 12px; color: var(--muted); font-size: .72rem; letter-sp
 .credits h2 { margin: 0; font-size: 1rem; font-weight: 400; }
 .credits dl { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 48px; }
 .project-navigation {
+    width: 100%;
+    max-width: 1800px;
+    margin-left: auto;
+    margin-right: auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     border-top: 1px solid var(--line);
